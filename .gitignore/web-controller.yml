@@ -14,7 +14,7 @@ spec:
         name: web
     spec:
       containers:
-      - image: <YOUR-CONTAINER>
+      - image: asia.gcr.io/linguist-2a182/backend:41
         name: web
         ports:
         - containerPort: 3000
