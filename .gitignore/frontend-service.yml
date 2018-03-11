@@ -3,12 +3,16 @@ kind: Service
 metadata:
   name: frontend
   labels:
-    name: frontend
+    run: frontend
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
-    - port: 80
-      targetPort: 3000
-      protocol: TCP
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
   selector:
-    name: web
+    run: frontend
