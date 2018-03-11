@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: asia.gcr.io/linguist-2a182/frontend:1
+        image: asia.gcr.io/linguist-2a182/frontend:88
         ports:
         - containerPort: 80
         - containerPort: 443 
