@@ -34,7 +34,7 @@ spec:
           secretName: nginx-ssl
       containers:
       - name: frontend
-        image: asia.gcr.io/linguist-2a182/frontend:89
+        image: asia.gcr.io/linguist-2a182/frontend:93
         args:
           - --ssl_port:443
         ports:
