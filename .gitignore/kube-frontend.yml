@@ -7,13 +7,15 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
-    targetPort: 80
-    protocol: TCP
-    name: http
-  - port: 443
-    protocol: TCP
-    name: https
+    -
+      port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+    -
+      port: 443
+      protocol: TCP
+      name: https
   selector:
     run: frontend
 ---
@@ -31,9 +33,8 @@ spec:
       containers:
       - name: frontend
         image: asia.gcr.io/linguist-2a182/frontend:89
-         args: [
-          "--ssl_port", "443"
-        ]
+        args:
+          - --ssl_port:443
         ports:
           - containerPort: 80
           - containerPort: 443
