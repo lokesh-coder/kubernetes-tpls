@@ -30,6 +30,10 @@ spec:
       labels:
         run: frontend
     spec:
+     volumes:
+      - name: nginx-ssl
+        secret:
+          secretName: nginx-ssl
       containers:
       - name: frontend
         image: asia.gcr.io/linguist-2a182/frontend:89
