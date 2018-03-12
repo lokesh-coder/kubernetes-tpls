@@ -1,0 +1,49 @@
+piVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    run: frontend
+spec:
+  type: LoadBalancer
+  ports:
+    -
+      port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+    -
+      port: 443
+      protocol: TCP
+      name: https
+  selector:
+    run: frontend
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: frontend
+    spec:
+     volumes:
+      - name: nginx-ssl
+        secret:
+          secretName: nginx-ssl
+      containers:
+      - name: frontend
+        image: asia.gcr.io/linguist-2a182/frontend:89
+        args:
+          - --ssl_port:443
+        ports:
+          - containerPort: 80
+          - containerPort: 443
+        volumeMounts:
+          - mountPath: /etc/nginx/ssl
+            name: nginx-ssl
+            readOnly: true
