@@ -1,36 +1,46 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend
+  name: frontend
   labels:
-    run: backend
+    run: frontend
 spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 3000
+    targetPort: 80
     protocol: TCP
     name: http
   - port: 443
     protocol: TCP
     name: https
   selector:
-    run: backend
+    run: frontend
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: backend
+  name: frontend
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        run: backend
+        run: frontend
     spec:
-      containers:
-      - name: backend
-        image: asia.gcr.io/linguist-2a182/backend:1
+     volumes:
+      - name: nginx-ssl
+        secret:
+          secretName: nginx-ssl
+     containers:
+      - name: frontend
+        image: asia.gcr.io/linguist-2a182/frontend:89
+        args:
+          - --ssl_port:443
         ports:
-        - containerPort: 3000
-        - containerPort: 443 
+          - containerPort: 80
+          - containerPort: 443
+        volumeMounts:
+          - mountPath: /etc/nginx/ssl
+            name: nginx-ssl
+            readOnly: true
