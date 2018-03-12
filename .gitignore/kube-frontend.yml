@@ -7,15 +7,13 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    -
-      port: 80
-      targetPort: 80
-      protocol: TCP
-      name: http
-    -
-      port: 443
-      protocol: TCP
-      name: https
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
   selector:
     run: frontend
 ---
