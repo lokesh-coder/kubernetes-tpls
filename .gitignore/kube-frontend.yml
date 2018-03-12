@@ -32,7 +32,7 @@ spec:
       - name: nginx-ssl
         secret:
           secretName: nginx-ssl
-      containers:
+     containers:
       - name: frontend
         image: asia.gcr.io/linguist-2a182/frontend:93
         args:
