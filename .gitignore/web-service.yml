@@ -6,7 +6,6 @@ metadata:
     name: web
 spec:
   type: LoadBalancer
-  loadBalancerIP: "35.190.57.67"
   ports:
     - port: 80
       targetPort: 3000
