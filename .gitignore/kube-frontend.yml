@@ -31,6 +31,13 @@ spec:
       containers:
       - name: frontend
         image: asia.gcr.io/linguist-2a182/frontend:89
+         args: [
+          "--ssl_port", "443"
+        ]
         ports:
-        - containerPort: 80
-        - containerPort: 443 
+          - containerPort: 80
+          - containerPort: 443
+        volumeMounts:
+          - mountPath: /etc/nginx/ssl
+            name: nginx-ssl
+            readOnly: true
