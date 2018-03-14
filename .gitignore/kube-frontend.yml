@@ -6,6 +6,7 @@ metadata:
     run: frontend
 spec:
   type: LoadBalancer
+  loadBalancerIP: 35.200.158.118
   ports:
   - port: 80
     targetPort: 80
